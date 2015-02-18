@@ -1,0 +1,19 @@
+{
+  "name": "etherpad-cli-client",
+  "description": "Node Client for Etherpad",
+  "version": "0.0.1",
+  "author": {
+    "name": "John McLear",
+    "email": "john@mclear.co.uk",
+    "url": "http://mclear.co.uk"
+  },
+  "contributors": [],
+  "dependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "repository" : {
+    "type" : "git",
+    "url"  : "https://github.com/johnmclear/etherpad-cli-client.git"
+  }
+}
