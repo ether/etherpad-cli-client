@@ -24,7 +24,7 @@ etherpad http://127.0.0.1/p/test/ -a "hello world"
 var etherpad = require("etherpad-cli-client");
 var pad = etherpad(); // Note no host or padId, will connect to random pad Id on localhost
 
-pad.on("connect", function(pad){
+pad.on("connected", function(pad){
   console.log("Connected to ", pad.url);
 });
 
@@ -52,7 +52,7 @@ pad.on("newContents", function(atext){
 ```
 var etherpad = require("etherpad-cli-client");
 var pad = etherpad("http://127.0.0.1:9001/p/test");
-pad.on("connect", function(){
+pad.on("connected", function(){
   setInterval(function(){
     pad.append("hello world spam"); // Appends Hello to the Pad contents
   }, 200);
