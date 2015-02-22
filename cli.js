@@ -8,8 +8,8 @@ var string = args[4];
 
 if(args.length < 3){
   console.log("No host specified..");
-  console.log("Stream Pad to CLI: etherpad http://127.0.0.1/p/test");
-  console.log("Append contents to pad: etherpad http://127.0.0.1/p/test -a 'hello world'");
+  console.log("Stream Pad to CLI: etherpad http://127.0.0.1:9001/p/test");
+  console.log("Append contents to pad: etherpad http://127.0.0.1:9001/p/test -a 'hello world'");
   process.exit(code=0);
 }
 

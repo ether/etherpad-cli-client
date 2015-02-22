@@ -1,6 +1,9 @@
 # Etherpad CLI Client
 Interact with Pad contents
 
+## Installation
+``sudo npm install -g etherpad-cli-client``
+
 # CLI
 ## Get help
 ```
