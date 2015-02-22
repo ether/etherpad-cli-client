@@ -1,5 +1,12 @@
 # Etherpad CLI Client
-Interact with Pad contents
+Interact with Etherpad contents in real time from within Node and from your CLI.
+
+## 5 seconds getting started...
+```
+sudo npm install -g etherpad-cli-client
+etherpad https://beta.etherpad.org/p/clitest
+```
+Visit etherpad https://beta.etherpad.org/p/clitest in your browser and start typing...
 
 ## Installation
 ``sudo npm install -g etherpad-cli-client``
