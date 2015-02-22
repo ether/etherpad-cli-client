@@ -1,7 +1,7 @@
 {
   "name": "etherpad-cli-client",
   "description": "Node Client for Etherpad",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "John McLear",
     "email": "john@mclear.co.uk",
