@@ -1,6 +1,23 @@
 # Etherpad CLI Client
 Interact with Pad contents
 
+# CLI
+## Get help
+```
+etherpad
+```
+
+## Stream Pad to CLI
+```
+etherpad http://127.0.0.1/p/test/
+```
+
+## Append contents to pad
+```
+etherpad http://127.0.0.1/p/test/ -a "hello world"
+```
+
+# NODE
 ## Basic Example
 
 ```
