@@ -13,3 +13,7 @@ pad.on("disconnect", function(e){
   process.exit(code=0)
 })
 
+pad.on("newContents", function(atext){
+  console.log("\u001b[2J\u001b[0;0H");
+  console.log("Test Pad Contents", "\n"+atext.text);
+});
