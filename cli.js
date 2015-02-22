@@ -29,14 +29,11 @@ if(host){
   }
   if(action){
     if(action === "-a"){
-      console.log("appending");
       // appending a string to a pad
       if(!string){
         console.log("No string specified with pad");
         process.exit(code=0);
       }
-
-console.log("host", host);
 
       var pad = etherpad.connect(host);
 
