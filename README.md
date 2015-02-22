@@ -12,12 +12,12 @@ etherpad
 
 ## Stream Pad to CLI
 ```
-etherpad http://127.0.0.1/p/test/
+etherpad http://127.0.0.1:9001/p/test/
 ```
 
 ## Append contents to pad
 ```
-etherpad http://127.0.0.1/p/test/ -a "hello world"
+etherpad http://127.0.0.1:9001/p/test/ -a "hello world"
 ```
 
 # NODE
