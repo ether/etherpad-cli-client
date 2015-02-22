@@ -34,8 +34,8 @@ etherpad http://127.0.0.1:9001/p/test/ -a "hello world"
 var etherpad = require("etherpad-cli-client");
 var pad = etherpad.connect(); // Note no host or padId, will connect to random pad Id on localhost
 
-pad.on("connected", function(pad){
-  console.log("Connected to ", pad.url);
+pad.on("connected", function(padState){
+  console.log("Connected to ", padState.url);
 });
 
 pad.on("message", function(message){
