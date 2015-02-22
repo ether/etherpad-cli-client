@@ -8,7 +8,9 @@
     "url": "http://mclear.co.uk"
   },
   "contributors": [],
-  "dependencies": {},
+  "dependencies": {
+    "socket.io-client":"*"
+  },
   "engines": {
     "node": "*"
   },

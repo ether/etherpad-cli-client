@@ -5,7 +5,7 @@ Interact with Pad contents
 
 ```
 var etherpad = require("etherpad-socketio-client");
-var pad = etherpad("http://127.0.0.1:9001/p/test");
+var pad = etherpad(); // Note no host or padId, will connect to random pad Id on localhost
 
 pad.on("connect", function(pad){
   console.log("Connected to ", pad.url);
@@ -17,6 +17,7 @@ pad.on("message", function(message){
 
 pad.on("disconnect", function(e){
   console.log("disconnected from pad", e);
+  process.exit(code=0)
 });
 ```
 
