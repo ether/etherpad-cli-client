@@ -4,7 +4,7 @@ Interact with Pad contents
 ## Basic Example
 
 ```
-var etherpad = require("etherpad-socketio-client");
+var etherpad = require("etherpad-cli-client");
 var pad = etherpad(); // Note no host or padId, will connect to random pad Id on localhost
 
 pad.on("connect", function(pad){
@@ -23,7 +23,7 @@ pad.on("disconnect", function(e){
 
 ## Stream Pad Text contents to CLI
 ```
-var etherpad = require("etherpad-socketio-client");
+var etherpad = require("etherpad-cli-client");
 var pad = etherpad("http://127.0.0.1:9001/p/test");
 pad.on("newContents", function(atext){
   console.log("\u001b[2J\u001b[0;0H");
@@ -33,12 +33,20 @@ pad.on("newContents", function(atext){
 
 ## Append contents to Pad
 ```
-var etherpad = require("etherpad-socketio-client");
+var etherpad = require("etherpad-cli-client");
 var pad = etherpad("http://127.0.0.1:9001/p/test");
 pad.on("connect", function(){
-  pad.append("hello"); // Appends Hello to the Pad contents
+  setInterval(function(){
+    pad.append("hello world spam"); // Appends Hello to the Pad contents
+  }, 200);
 });
 ```
+
+## Prefix contents to Pad
+TODO
+
+## Write contents to specific location in Pad
+TODO
 
 ## Todo
 Prefix Pad content
