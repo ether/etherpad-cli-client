@@ -1,13 +1,16 @@
 {
   "name": "etherpad-cli-client",
   "description": "Node Client for Etherpad",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": {
     "name": "John McLear",
     "email": "john@mclear.co.uk",
     "url": "http://mclear.co.uk"
   },
-  "contributors": [],
+  "contributors": [{
+    "name": "Dmitry Uvarov",
+    "email":"uvarov.dl@gmail.com"
+  }],
   "dependencies": {
     "socket.io-client":"*"
   },
