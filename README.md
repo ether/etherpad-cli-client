@@ -1,5 +1,5 @@
 # Etherpad CLI Client
-Interact with Etherpad contents in real time from within Node and from your CLI.
+Interact with Etherpad contents in real time from within Node and from your CLI.  NOTE:  Your Etherpad installation must be in loadTest mode for this client to work.  We hope in the future to support full editor functionality but for how functionality is limited.  Read the Etherpad Guide for how to enable load testing.  https://github.com/ether/etherpad-lite/wiki/Load-Testing-Etherpad
 
 ## 5 seconds getting started...
 ```
