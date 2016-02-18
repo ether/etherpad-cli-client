@@ -2,7 +2,7 @@
 Interact with Etherpad contents in real time from within Node and from your CLI.  
 
 # IMPORTANT: Your Etherpad installation must be in loadTest mode for this client to work.  
-** TLDR; Set ``loadTest`` to ``true`` in your Etherpad settings.json **
+TLDR; Set ``loadTest`` to ``true`` in your Etherpad settings.json
 
 We hope in the future to support full editor functionality but for how functionality is limited.  Read the Etherpad Guide for how to enable load testing.  https://github.com/ether/etherpad-lite/wiki/Load-Testing-Etherpad
 Want to fund some dev so this isn't required?  Get at me.
