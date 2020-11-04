@@ -7,22 +7,24 @@
     "email": "john@mclear.co.uk",
     "url": "http://mclear.co.uk"
   },
-  "contributors": [{
-    "name": "Dmitry Uvarov",
-    "email":"uvarov.dl@gmail.com"
-  }],
+  "contributors": [
+    {
+      "name": "Dmitry Uvarov",
+      "email": "uvarov.dl@gmail.com"
+    }
+  ],
   "dependencies": {
-    "socket.io-client":"*",
-    "async":"*"
+    "async": "*",
+    "ws": "^7.3.1"
   },
   "engines": {
     "node": "*"
   },
-  "repository" : {
-    "type" : "git",
-    "url"  : "https://github.com/johnmclear/etherpad-cli-client.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnmclear/etherpad-cli-client.git"
   },
-  "bin":{
-    "etherpad":"cli.js"
+  "bin": {
+    "etherpad": "cli.js"
   }
 }
