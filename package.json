@@ -12,7 +12,7 @@
     "email":"uvarov.dl@gmail.com"
   }],
   "dependencies": {
-    "socket.io-client":"*",
+    "socket.io-client":"^2.3.0",
     "async":"*"
   },
   "engines": {
