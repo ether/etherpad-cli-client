@@ -1,28 +1,30 @@
 {
   "name": "etherpad-cli-client",
   "description": "Node Client for Etherpad",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "author": {
     "name": "John McLear",
     "email": "john@mclear.co.uk",
     "url": "http://mclear.co.uk"
   },
-  "contributors": [{
-    "name": "Dmitry Uvarov",
-    "email":"uvarov.dl@gmail.com"
-  }],
+  "contributors": [
+    {
+      "name": "Dmitry Uvarov",
+      "email": "uvarov.dl@gmail.com"
+    }
+  ],
   "dependencies": {
-    "socket.io-client":"^2.3.0",
-    "async":"*"
+    "socket.io-client": "^2.3.0",
+    "async": "*"
   },
   "engines": {
     "node": "*"
   },
-  "repository" : {
-    "type" : "git",
-    "url"  : "https://github.com/johnmclear/etherpad-cli-client.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnmclear/etherpad-cli-client.git"
   },
-  "bin":{
-    "etherpad":"cli.js"
+  "bin": {
+    "etherpad": "cli.js"
   }
 }
