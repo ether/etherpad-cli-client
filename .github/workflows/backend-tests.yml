@@ -37,7 +37,6 @@ jobs:
         cd node_modules/ep_client
         npm ci
 
-
     - name: Remove core tests so only the client is tested
       run: |
         rm -Rf src/tests/backend/specs
