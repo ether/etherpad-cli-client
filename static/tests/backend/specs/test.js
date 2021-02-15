@@ -1,6 +1,6 @@
 'use strict';
 
-const etherpad = require('../../../index');
+const etherpad = require('../../../../index');
 
 describe('Client connectivity', function () {
   context('Connects', function () {
