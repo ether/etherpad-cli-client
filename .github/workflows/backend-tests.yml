@@ -13,7 +13,7 @@ jobs:
     if: |
          (github.event_name != 'pull_request')
          || (github.event.pull_request.head.repo.id != github.event.pull_request.base.repo.id)
-    name: with Plugins
+    name: Client interaction with Etherpad
     runs-on: ubuntu-latest
 
     steps:
@@ -40,7 +40,7 @@ jobs:
 
     - name: Remove core tests so only the client is tested
       run: |
-        rm src/tests/backend/specs/*
+        rm -Rf src/tests/backend/specs
 
     # configures some settings and runs npm run test
     - name: Run the backend tests
