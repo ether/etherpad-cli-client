@@ -37,6 +37,11 @@ jobs:
         cd node_modules/ep_client
         npm ci
 
+
+    - name: Remove core tests so only the client is tested
+      run: |
+        rm src/tests/backend/specs/*
+
     # configures some settings and runs npm run test
     - name: Run the backend tests
       run: src/tests/frontend/travis/runnerBackend.sh
