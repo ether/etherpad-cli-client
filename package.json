@@ -14,8 +14,9 @@
     }
   ],
   "dependencies": {
+    "async": "*",
     "socket.io-client": "^2.3.0",
-    "async": "*"
+    "superagent": "^6.1.0"
   },
   "devDependencies": {
     "eslint": "^7.18.0",
