@@ -1,3 +1,5 @@
+![Publish Status](https://github.com/ether/etherpad-cli-client/workflows/Node.js%20Package/badge.svg) ![Backend Tests Status](https://github.com/ether/etherpad-cli-client/workflows/Backend%20tests/badge.svg)
+
 # Etherpad CLI Client
 Interact with Etherpad contents in real time from within Node and from your CLI.  
 
