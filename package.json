@@ -35,7 +35,7 @@
     "url": "https://github.com/johnmclear/etherpad-cli-client.git"
   },
   "bin": {
-    "etherpad": "cli.js"
+    "etherpad-cli": "cli.js"
   },
   "peerDependencies": {
     "ep_etherpad-lite": ">=1.8.6"
