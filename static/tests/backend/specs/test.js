@@ -1,17 +1,17 @@
 'use strict';
 
+const common = require('ep_etherpad-lite/tests/backend/common');
 const etherpad = require('../../../../index');
 
-describe('Client connectivity', function () {
-  context('Connects', function () {
-    it('Connected', function (done) {
-      this.timeout(10000);
-      const pad = etherpad.connect('http://127.0.0.1:9001/p/test');
-      pad.on('connected', (padState) => {
-        console.log('Connected to', padState.host, 'with padId', padState.padId);
-        done();
-        process.exit(0); /* eslint-disable-line no-process-exit */
-      });
-    });
+describe(__filename, function () {
+  before(async function () {
+    await common.init();
+  });
+
+  it('connects', async function () {
+    const pad = etherpad.connect(new URL('/p/test', common.baseUrl).href);
+    const padState = await new Promise((resolve) => pad.on('connected', (s) => resolve(s)));
+    common.logger.info('Connected to', padState.host, 'with padId', padState.padId);
+    pad.close();
   });
 });
