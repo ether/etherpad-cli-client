@@ -56,7 +56,6 @@ jobs:
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
           pnpm i
-          pnpm link ep_etherpad-lite
           cd ../etherpad
           pnpm link "${PLUGIN_NAME}"
           # Rename to match the glob pattern passed to mocha.
