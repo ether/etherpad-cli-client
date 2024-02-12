@@ -49,16 +49,16 @@ jobs:
         name: Prepare Etherpad core
         run: |
           cd ./etherpad/src
-          npm ci
-          npm link
+          pnpm i
+          pnpm link --global ep_etherpad-lite
       -
         name: Prepare plugin
         run: |
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
-          npm ci
-          npm link
-          npm link ep_etherpad-lite
+          pnpm i
+          pnpm link ep_etherpad-lite
+          pnpm link ep_etherpad-lite
           cd ../etherpad
           npm link "${PLUGIN_NAME}"
           # Rename to match the glob pattern passed to mocha.
@@ -68,4 +68,4 @@ jobs:
         run: rm -rf ./etherpad/src/tests/backend/specs
       -
         name: Run the backend tests
-        run: cd ./etherpad/src && npm test
+        run: cd ./etherpad/src && pnpm test
