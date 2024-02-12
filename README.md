@@ -1,3 +1,5 @@
+![Publish Status](https://github.com/ether/etherpad-cli-client/workflows/Node.js%20Package/badge.svg) ![Backend Tests Status](https://github.com/ether/etherpad-cli-client/workflows/Backend%20tests/badge.svg)
+
 # Etherpad CLI Client
 Interact with Etherpad contents in real time from within Node and from your CLI.  
 
@@ -10,7 +12,7 @@ Want to fund some dev so this isn't required?  Get at me.
 ## 5 seconds getting started...
 ```
 sudo npm install -g etherpad-cli-client
-etherpad https://beta.etherpad.org/p/clitest
+etherpad-cli https://beta.etherpad.org/p/clitest
 ```
 Visit etherpad https://beta.etherpad.org/p/clitest in your browser and start typing...
 
@@ -20,17 +22,17 @@ Visit etherpad https://beta.etherpad.org/p/clitest in your browser and start typ
 # CLI
 ## Get help
 ```
-etherpad
+etherpad-cli
 ```
 
 ## Stream Pad to CLI
 ```
-etherpad http://127.0.0.1:9001/p/test
+etherpad-cli http://127.0.0.1:9001/p/test
 ```
 
 ## Append contents to pad
 ```
-etherpad http://127.0.0.1:9001/p/test -a "hello world"
+etherpad-cli http://127.0.0.1:9001/p/test -a "hello world"
 ```
 
 # NODE
