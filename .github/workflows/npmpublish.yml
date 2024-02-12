@@ -43,11 +43,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'npm'
-          cache-dependency-path: |
-            node_modules/ep_etherpad-lite/package-lock.json
-            node_modules/ep_etherpad-lite/bin/doc/package-lock.json
-            package-lock.json
       # All of ep_etherpad-lite's devDependencies are installed because the
       # plugin might do `require('ep_etherpad-lite/node_modules/${devDep}')`.
       # Eventually it would be nice to create an ESLint plugin that prohibits
