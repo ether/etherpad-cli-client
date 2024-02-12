@@ -20,6 +20,7 @@ jobs:
         with:
           repository: ether/etherpad-lite
           path: ./etherpad
+          ref: develop
       -
         name: Checkout plugin repository
         uses: actions/checkout@v4

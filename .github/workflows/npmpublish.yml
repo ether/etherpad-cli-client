@@ -26,6 +26,7 @@ jobs:
         with:
           repository: ether/etherpad-lite
           path: etherpad-lite
+          ref: develop
       -
         run: mv etherpad-lite ..
       # etherpad-lite has been moved outside of $GITHUB_WORKSPACE, so it is now
@@ -43,6 +44,22 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       # All of ep_etherpad-lite's devDependencies are installed because the
       # plugin might do `require('ep_etherpad-lite/node_modules/${devDep}')`.
       # Eventually it would be nice to create an ESLint plugin that prohibits
@@ -50,9 +67,9 @@ jobs:
       # devDependencies. If we had that, we could change this line to only
       # install production dependencies.
       -
-        run: cd ../etherpad-lite/src && npm ci
+        run: cd ../etherpad-lite/src && pnpm i
       -
-        run: npm ci
+        run: pnpm i
       # This runs some sanity checks and creates a symlink at
       # node_modules/ep_etherpad-lite that points to ../../etherpad-lite/src.
       # This step must be done after `npm ci` installs the plugin's dependencies
@@ -60,11 +77,11 @@ jobs:
       # ep_etherpad-lite in the plugin's node_modules prevents lint errors and
       # unit test failures if the plugin does `require('ep_etherpad-lite/foo')`.
       -
-        run: npm install --no-save ep_etherpad-lite@file:../etherpad-lite/src
+        run: pnpm install ep_etherpad-lite@file:../etherpad-lite/src
       -
-        run: npm test
+        run: pnpm test
       -
-        run: npm run lint
+        run: pnpm run lint
 
   publish-npm:
     if: github.event_name == 'push'
