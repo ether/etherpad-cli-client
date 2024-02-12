@@ -50,6 +50,7 @@ jobs:
         run: |
           cd ./etherpad/src
           pnpm i
+          pnpm link ep_etherpad-lite
       -
         name: Prepare plugin
         run: |
