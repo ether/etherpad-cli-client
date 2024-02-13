@@ -26,6 +26,7 @@ jobs:
         with:
           repository: ether/etherpad-lite
           path: etherpad-lite
+          ref: develop
       -
         run: mv etherpad-lite ..
       # etherpad-lite has been moved outside of $GITHUB_WORKSPACE, so it is now
@@ -48,8 +49,6 @@ jobs:
             node_modules/ep_etherpad-lite/package-lock.json
             node_modules/ep_etherpad-lite/bin/doc/package-lock.json
             package-lock.json
-      - run: npm install npm@6.14.18 -g
-        name: Install legacy npm for correct dependency resolution
       # All of ep_etherpad-lite's devDependencies are installed because the
       # plugin might do `require('ep_etherpad-lite/node_modules/${devDep}')`.
       # Eventually it would be nice to create an ESLint plugin that prohibits
@@ -57,9 +56,9 @@ jobs:
       # devDependencies. If we had that, we could change this line to only
       # install production dependencies.
       -
-        run: cd ../etherpad-lite/src && npm ci
+        run: cd ../etherpad-lite/src && npm i
       -
-        run: npm ci
+        run: npm i
       # This runs some sanity checks and creates a symlink at
       # node_modules/ep_etherpad-lite that points to ../../etherpad-lite/src.
       # This step must be done after `npm ci` installs the plugin's dependencies
@@ -98,13 +97,13 @@ jobs:
           [ "${NEW_COMMITS}" -gt 0 ] || exit 0
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          npm ci
+          npm i
           npm version patch
           git push --follow-tags
       # This is required if the package has a prepare script that uses something
       # in dependencies or devDependencies.
       -
-        run: npm ci
+        run: npm i
       # `npm publish` must come after `git push` otherwise there is a race
       # condition: If two PRs are merged back-to-back then master/main will be
       # updated with the commits from the second PR before the first PR's

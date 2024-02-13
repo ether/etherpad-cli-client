@@ -20,6 +20,7 @@ jobs:
         with:
           repository: ether/etherpad-lite
           path: ./etherpad
+          ref: develop
       -
         name: Checkout plugin repository
         uses: actions/checkout@v4
@@ -34,20 +35,18 @@ jobs:
             etherpad/src/package-lock.json
             etherpad/src/bin/doc/package-lock.json
             plugin/package-lock.json
-      - run: npm install npm@6.14.18 -g
-        name: Install legacy npm for correct dependency resolution
       -
         name: Prepare Etherpad core
         run: |
           cd ./etherpad/src
-          npm ci
+          npm i
           npm link
       -
         name: Prepare plugin
         run: |
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
-          npm ci
+          npm i
           npm link
           npm link ep_etherpad-lite
           cd ../etherpad
