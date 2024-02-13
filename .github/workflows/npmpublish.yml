@@ -56,9 +56,9 @@ jobs:
       # devDependencies. If we had that, we could change this line to only
       # install production dependencies.
       -
-        run: cd ../etherpad-lite/src && npm i
+        run: cd ../etherpad-lite/src && npm i --legacy-peer-deps
       -
-        run: npm i
+        run: npm i --legacy-peer-deps
       # This runs some sanity checks and creates a symlink at
       # node_modules/ep_etherpad-lite that points to ../../etherpad-lite/src.
       # This step must be done after `npm ci` installs the plugin's dependencies
@@ -66,7 +66,7 @@ jobs:
       # ep_etherpad-lite in the plugin's node_modules prevents lint errors and
       # unit test failures if the plugin does `require('ep_etherpad-lite/foo')`.
       -
-        run: npm install --no-save ep_etherpad-lite@file:../etherpad-lite/src
+        run: npm install --legacy-peer-deps --no-save ep_etherpad-lite@file:../etherpad-lite/src
       -
         run: npm test
       -
@@ -87,8 +87,6 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
           cache: 'npm'
-      - run: npm install npm@6.14.18 -g
-        name: Install legacy npm for correct dependency resolution
       -
         name: Bump version (patch)
         run: |
@@ -97,13 +95,13 @@ jobs:
           [ "${NEW_COMMITS}" -gt 0 ] || exit 0
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          npm i
+          npm i --legacy-peer-deps
           npm version patch
           git push --follow-tags
       # This is required if the package has a prepare script that uses something
       # in dependencies or devDependencies.
       -
-        run: npm i
+        run: npm i --legacy-peer-deps
       # `npm publish` must come after `git push` otherwise there is a race
       # condition: If two PRs are merged back-to-back then master/main will be
       # updated with the commits from the second PR before the first PR's

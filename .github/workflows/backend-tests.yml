@@ -39,14 +39,14 @@ jobs:
         name: Prepare Etherpad core
         run: |
           cd ./etherpad/src
-          npm i
+          npm i --legacy-peer-deps
           npm link
       -
         name: Prepare plugin
         run: |
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
-          npm i
+          npm i --legacy-peer-deps
           npm link
           npm link ep_etherpad-lite
           cd ../etherpad
