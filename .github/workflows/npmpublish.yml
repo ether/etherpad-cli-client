@@ -56,6 +56,7 @@ jobs:
         run: pnpm install ep_etherpad-lite@file:../etherpad-lite/src
       -
         run: pnpm test
+        working-directory: ./node_modules/ep_etherpad-lite
       -
         run: pnpm run lint
 
