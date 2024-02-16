@@ -58,6 +58,7 @@ jobs:
         run: |
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
+          pnpm config set auto-install-peers false
           pnpm i
           pnpm link .
           pnpm link ep_etherpad-lite
