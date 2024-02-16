@@ -60,7 +60,6 @@ jobs:
           pnpm i
           pnpm link --global
           cd ../etherpad/src
-          pnpm link "${PLUGIN_NAME}"
           # Rename to match the glob pattern passed to mocha.
           mv node_modules/"${PLUGIN_NAME}" node_modules/ep_client
       -
