@@ -81,7 +81,7 @@ jobs:
       -
         run: |
           ls -lisa
-          pnpm run test
+          npm run test
       -
         run: pnpm run lint
 

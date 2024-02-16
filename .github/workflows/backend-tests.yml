@@ -52,7 +52,7 @@ jobs:
           cd ./etherpad/src
           pnpm i
           ls -lisa
-          pnpm link .
+          pnpm link --global
       -
         name: Prepare plugin
         run: |
@@ -60,7 +60,7 @@ jobs:
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
           pnpm i
-          pnpm link .
+          pnpm link --global
           pnpm link ep_etherpad-lite
           cd ../etherpad
           ls -lisa
