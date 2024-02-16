@@ -20,7 +20,6 @@ jobs:
         with:
           repository: ether/etherpad-lite
           path: ./etherpad
-          ref: develop
       -
         name: Checkout plugin repository
         uses: actions/checkout@v4
@@ -51,7 +50,6 @@ jobs:
         run: |
           cd ./etherpad/src
           pnpm i
-          ls -lisa
           pnpm link --global
       -
         name: Prepare plugin
@@ -63,7 +61,6 @@ jobs:
           pnpm link --global
           pnpm link ep_etherpad-lite
           cd ../etherpad
-          ls -lisa
           pnpm link "${PLUGIN_NAME}"
           # Rename to match the glob pattern passed to mocha.
           mv node_modules/"${PLUGIN_NAME}" node_modules/ep_client
