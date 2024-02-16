@@ -50,6 +50,7 @@ jobs:
         run: |
           cd ./etherpad/src
           ./bin/installDeps.sh
+          pnpm link --global
       -
         name: Prepare plugin
         run: |
@@ -58,12 +59,11 @@ jobs:
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
           pnpm i
           pnpm link --global
-          cd ../etherpad/src
-          #pnpm link "${PLUGIN_NAME}"
+          pnpm link --global ep_etherpad-lite
+          cd ../etherpad
+          pnpm link --global "${PLUGIN_NAME}"
           # Rename to match the glob pattern passed to mocha.
-          mv node_modules/"${PLUGIN_NAME}" ../node_modules/ep_client
-          pwd
-          ls -l ../node_modules/ep_*/static/tests/backend/specs
+          mv node_modules/"${PLUGIN_NAME}" nodes_modules/ep_client
       -
         name: Remove core tests so only the client is tested
         run: rm -rf ./etherpad/src/tests/backend/specs
