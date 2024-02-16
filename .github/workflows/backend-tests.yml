@@ -63,7 +63,7 @@ jobs:
           # Rename to match the glob pattern passed to mocha.
           mv node_modules/"${PLUGIN_NAME}" ../node_modules/ep_client
           pwd
-          ls -l ../node_modules
+          ls -l ../node_modules/ep_*/static/tests/backend/specs
       -
         name: Remove core tests so only the client is tested
         run: rm -rf ./etherpad/src/tests/backend/specs
