@@ -55,7 +55,7 @@ jobs:
         name: Prepare plugin
         run: |
           pnpm config set auto-install-peers false
-          cd ./plugin
+          cd ./plugin/src
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
           pnpm i
           pnpm link --global
