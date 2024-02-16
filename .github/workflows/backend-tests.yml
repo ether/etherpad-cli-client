@@ -49,7 +49,7 @@ jobs:
         name: Prepare Etherpad core
         run: |
           cd ./etherpad/src
-          ./src/bin/installDeps.sh
+          ./bin/installDeps.sh
       -
         name: Prepare plugin
         run: |
