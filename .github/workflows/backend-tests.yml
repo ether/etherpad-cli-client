@@ -64,7 +64,7 @@ jobs:
           cd ../etherpad/src
           pnpm link --global "${PLUGIN_NAME}"
           # Rename to match the glob pattern passed to mocha.
-          ln -s  ./node_modules/${PLUGIN_NAME} ../node_modules/ep_client
+          ln -s  ../src/node_modules/${PLUGIN_NAME} ../node_modules/ep_client
       -
         name: Remove core tests so only the client is tested
         run: rm -rf ./etherpad/src/tests/backend/specs
