@@ -1,7 +1,7 @@
 {
   "name": "etherpad-cli-client",
   "description": "Node Client for Etherpad",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "author": {
     "name": "John McLear",
     "email": "john@mclear.co.uk",
@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "async": "^3.2.4",
-    "socket.io-client": "^2.3.0",
+    "socket.io-client": "^3.1.2",
     "superagent": "^8.1.2"
   },
   "devDependencies": {
@@ -28,7 +28,7 @@
     "lint:fix": "eslint --fix ."
   },
   "engines": {
-    "node": ">=12.17.0"
+    "node": ">=18.0.0"
   },
   "repository": {
     "type": "git",
