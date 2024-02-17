@@ -54,13 +54,13 @@ jobs:
       -
         run: |
           has_testcli_script () {
-            [[ $(npm run | grep "^  test" | wc -l) > 0 ]]
+            [[ $(pnpm run | grep "^  test" | wc -l) > 0 ]]
           }
             
             if has_testcli_script; then
             pnpm run test
             else
-            npm test
+            echo "No test script found"
             fi
         name: Run tests if available
       -
