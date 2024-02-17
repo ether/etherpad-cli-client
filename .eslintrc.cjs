@@ -5,5 +5,8 @@ require('eslint-config-etherpad/patch/modern-module-resolution');
 
 module.exports = {
   root: true,
+  rules:{
+    'no-extraneous-require': 'off', // Turn off the rule here
+  },
   extends: 'etherpad/plugin',
 };

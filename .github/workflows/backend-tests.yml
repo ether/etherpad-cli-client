@@ -29,34 +29,45 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'npm'
-          cache-dependency-path: |
-            etherpad/src/package-lock.json
-            etherpad/src/bin/doc/package-lock.json
-            plugin/package-lock.json
-      - run: npm install npm@6.14.18 -g
-        name: Install legacy npm for correct dependency resolution
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       -
         name: Prepare Etherpad core
         run: |
           cd ./etherpad/src
-          npm ci
-          npm link
+          ./bin/installDeps.sh
+          pnpm link --global
+          ls -lisa ../node_modules
       -
         name: Prepare plugin
         run: |
+          pnpm config set auto-install-peers false
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
-          npm ci
-          npm link
-          npm link ep_etherpad-lite
-          cd ../etherpad
-          npm link "${PLUGIN_NAME}"
+          pnpm i
+          pnpm link --global
+          pnpm link --global ep_etherpad-lite
+          cd ../etherpad/src
+          pnpm link --global "${PLUGIN_NAME}"
           # Rename to match the glob pattern passed to mocha.
-          mv node_modules/"${PLUGIN_NAME}" node_modules/ep_client
+          ln -s  ../src/node_modules/${PLUGIN_NAME} ../node_modules/ep_client
       -
         name: Remove core tests so only the client is tested
         run: rm -rf ./etherpad/src/tests/backend/specs
       -
         name: Run the backend tests
-        run: cd ./etherpad/src && npm test
+        run: cd ./etherpad/src && pnpm test

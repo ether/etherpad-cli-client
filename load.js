@@ -9,20 +9,6 @@ const host = 'http://127.0.0.1:9001/p/test';
 // For now let's create 5 lurking clients and 1 author.
 const c = ['a', 'a', 'a', 'a', 'l', 'a'];
 
-async.eachSeries(c, (type, callback) => {
-  setTimeout(() => {
-    if (type === 'l') {
-      newLurker();
-      callback();
-    }
-    if (type === 'a') {
-      newAuthor();
-      callback();
-    }
-  }, 1);
-}, (err) => {
-
-});
 
 const newAuthor = () => {
   const pad = etherpad.connect(host);
@@ -40,3 +26,19 @@ const newLurker = () => {
     console.log('Connected new lurker to', padState.host);
   });
 };
+
+
+async.eachSeries(c, (type, callback) => {
+  setTimeout(() => {
+    if (type === 'l') {
+      newLurker();
+      callback();
+    }
+    if (type === 'a') {
+      newAuthor();
+      callback();
+    }
+  }, 1);
+}, (err) => {
+
+});

@@ -37,9 +37,6 @@
   "bin": {
     "etherpad-cli": "cli.js"
   },
-  "peerDependencies": {
-    "ep_etherpad-lite": ">=1.8.6"
-  },
   "funding": {
     "type": "individual",
     "url": "https://etherpad.org/"
