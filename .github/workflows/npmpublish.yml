@@ -44,17 +44,25 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       -
-        run: cd ../etherpad-lite/src && ./bin/installDeps.sh
+        run: cd ../etherpad-lite/src && ./bin/installDeps.sh && pnpm link --global
       -
         run: |
           pnpm config set auto-install-peers false
           pnpm i
       -
-        run: pnpm install ep_etherpad-lite@file:../etherpad-lite/src
+        run: pnpm link --global ep_etherpad-lite
       -
         run: |
-          pnpm run test
-        working-directory: ./node_modules/ep_etherpad-lite
+          has_testcli_script () {
+            [[ $(npm run | grep "^  test" | wc -l) > 0 ]]
+          }
+            
+            if has_testcli_script; then
+            pnpm run test
+            else
+            npm test
+            fi
+        name: Run tests if available
       -
         run: pnpm run lint
 
