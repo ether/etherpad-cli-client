@@ -50,7 +50,7 @@ jobs:
           pnpm config set auto-install-peers false
           pnpm i
       -
-        run: pnpm link --global ep_etherpad-lite
+        run: pnpm link --global etherpad
       -
         run: |
           has_testcli_script () {
