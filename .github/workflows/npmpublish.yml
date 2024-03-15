@@ -44,7 +44,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       -
-        run: cd ../etherpad-lite/src && ./bin/installDeps.sh && pnpm link --global
+        run: cd ../etherpad-lite && ./bin/installDeps.sh && pnpm link --global
       -
         run: |
           pnpm config set auto-install-peers false

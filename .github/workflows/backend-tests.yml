@@ -48,10 +48,9 @@ jobs:
       -
         name: Prepare Etherpad core
         run: |
-          cd ./etherpad/src
+          cd ./etherpad
           ./bin/installDeps.sh
           pnpm link --global
-          ls -lisa ../node_modules
       -
         name: Prepare plugin
         run: |
