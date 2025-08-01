@@ -58,8 +58,6 @@ jobs:
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
           pnpm i
-          pnpm link --global "${PLUGIN_NAME}"
-          # Rename to match the glob pattern passed to mocha.
           ln -s  ../src/node_modules/${PLUGIN_NAME} ../node_modules/ep_client
       -
         name: Remove core tests so only the client is tested
