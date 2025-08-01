@@ -50,8 +50,6 @@ jobs:
           pnpm config set auto-install-peers false
           pnpm i
       -
-        run: pnpm link --global etherpad
-      -
         run: |
           has_testcli_script () {
             [[ $(pnpm run | grep "^  test" | wc -l) > 0 ]]

@@ -57,8 +57,12 @@ jobs:
           pnpm config set auto-install-peers false
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
-          pnpm i
-          ln -s  ../src/node_modules/. ../node_modules/ep_client
+          pnpm install
+          pnpm link --global
+      - name: Link plugin to Etherpad
+        run: |
+          cd ./etherpad/src
+          pnpm link --global etherpad-cli-client
       -
         name: Remove core tests so only the client is tested
         run: rm -rf ./etherpad/src/tests/backend/specs
