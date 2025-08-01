@@ -1,6 +1,6 @@
+
 'use strict';
 
-/* eslint  n/no-extraneous-require: off */
 const common = require('ep_etherpad-lite/tests/backend/common');
 const etherpad = require('../../../../index');
 

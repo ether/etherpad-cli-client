@@ -14,12 +14,12 @@
     }
   ],
   "dependencies": {
-    "async": "^3.2.4",
-    "socket.io-client": "^4.7.5",
-    "superagent": "^8.1.2"
+    "async": "^3.2.6",
+    "socket.io-client": "^4.8.1",
+    "superagent": "^10.2.3"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
+    "eslint": "^9.32.0",
     "eslint-config-etherpad": "^3.0.13",
     "typescript": "^5.4.2"
   },
