@@ -69,4 +69,4 @@ jobs:
         run: rm -rf ./etherpad/src/tests/backend/specs
       -
         name: Run the backend tests
-        run: cd ./etherpad/src && pnpm test
+        run: cd ./etherpad && pnpm run test
