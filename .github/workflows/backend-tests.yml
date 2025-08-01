@@ -60,7 +60,7 @@ jobs:
           pnpm i
           pnpm link --global
           pnpm unlink --global etherpad || true
-          pnpm link --globa
+          pnpm link --global
           cd ../etherpad/src
           pnpm link --global "${PLUGIN_NAME}"
           # Rename to match the glob pattern passed to mocha.
