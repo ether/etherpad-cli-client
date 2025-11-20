@@ -16,13 +16,13 @@ jobs:
     steps:
       -
         name: Install etherpad core
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: ether/etherpad-lite
           path: ./etherpad
       -
         name: Checkout plugin repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           path: ./plugin
       -
