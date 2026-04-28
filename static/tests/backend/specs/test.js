@@ -1,4 +1,4 @@
-import common from '../../../../../../tests/backend/common';
+import common from '../../../../../etherpad/src/tests/backend/common';
 import * as etherpad from '../../../../dist/index.js';
 
 describe(__filename, function () {
