@@ -2,6 +2,7 @@
   "name": "etherpad-cli-client",
   "description": "Node Client for Etherpad",
   "version": "3.0.5",
+  "type": "module",
   "author": {
     "name": "John McLear",
     "email": "john@mclear.co.uk",
@@ -13,17 +14,34 @@
       "email": "uvarov.dl@gmail.com"
     }
   ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "dependencies": {
-    "async": "^3.2.6",
     "socket.io-client": "^4.8.1",
     "superagent": "^10.2.3"
   },
   "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@types/superagent": "^8.1.7",
     "eslint": "^9.32.0",
     "eslint-config-etherpad": "^3.0.13",
     "typescript": "^5.4.2"
   },
   "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
@@ -35,7 +53,7 @@
     "url": "https://github.com/johnmclear/etherpad-cli-client.git"
   },
   "bin": {
-    "etherpad-cli": "cli.js"
+    "etherpad-cli": "dist/cli.js"
   },
   "funding": {
     "type": "individual",

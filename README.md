@@ -39,8 +39,8 @@ etherpad-cli http://127.0.0.1:9001/p/test -a "hello world"
 ## Basic Example
 
 ```
-var etherpad = require("etherpad-cli-client");
-var pad = etherpad.connect(); // Note no host or padId, will connect to random pad Id on localhost
+import {connect} from 'etherpad-cli-client';
+const pad = connect(); // Note no host or padId, will connect to random pad Id on localhost
 
 pad.on("connected", function(padState){
   console.log("Connected to ", padState.host);
@@ -58,8 +58,8 @@ pad.on("disconnect", function(e){
 
 ## Stream Pad Text contents to CLI
 ```
-var etherpad = require("etherpad-cli-client");
-var pad = etherpad.connect("http://127.0.0.1:9001/p/test");
+import {connect} from 'etherpad-cli-client';
+const pad = connect("http://127.0.0.1:9001/p/test");
 pad.on("newContents", function(atext){
   console.log("\u001b[2J\u001b[0;0H");
   console.log("Test Pad Contents", "\n"+atext.text);
@@ -68,8 +68,8 @@ pad.on("newContents", function(atext){
 
 ## Append contents to Pad
 ```
-var etherpad = require("etherpad-cli-client");
-var pad = etherpad.connect("http://127.0.0.1:9001/p/test");
+import {connect} from 'etherpad-cli-client';
+const pad = connect("http://127.0.0.1:9001/p/test");
 pad.on("connected", function(){
   setInterval(function(){
     pad.append("hello world spam"); // Appends Hello to the Pad contents
