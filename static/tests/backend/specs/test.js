@@ -1,8 +1,5 @@
-
-'use strict';
-
-const common = require('ep_etherpad-lite/tests/backend/common');
-const etherpad = require('../../../../index');
+import * as common from '../../../../../etherpad/src/tests/backend/common';
+import * as etherpad from '../../../../dist/index.js';
 
 describe(__filename, function () {
   before(async function () {

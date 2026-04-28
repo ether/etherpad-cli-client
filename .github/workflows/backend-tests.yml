@@ -57,15 +57,19 @@ jobs:
           pnpm config set auto-install-peers false
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
+          echo "PLUGIN_NAME=$PLUGIN_NAME" >> $GITHUB_ENV
           pnpm install
+          pnpm build
           pnpm link --global
       - name: Link plugin to Etherpad
         run: |
           cd ./etherpad/src
-          pnpm link etherpad-cli-client
+          pnpm link "$PLUGIN_NAME"
       -
         name: Remove core tests so only the client is tested
         run: rm -rf ./etherpad/src/tests/backend/specs
       -
         name: Run the backend tests
-        run: cd ./etherpad && pnpm run test
+        run: |
+          cd ./etherpad/src
+          pnpm --filter ep_etherpad-lite exec cross-env NODE_ENV=production mocha --import=tsx --timeout 120000 --recursive tests/backend/specs/**.ts ../node_modules/ep_*/static/tests/backend/specs/** ../node_modules/$PLUGIN_NAME/static/tests/backend/specs/**

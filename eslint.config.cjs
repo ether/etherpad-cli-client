@@ -23,4 +23,4 @@ module.exports = defineConfig([{
         "no-extraneous-require": "off",
     },
 
-}, globalIgnores(["lib/Changeset.js"])]);
+}]);
