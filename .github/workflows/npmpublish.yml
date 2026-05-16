@@ -69,19 +69,20 @@ jobs:
           cache: pnpm
           registry-url: https://registry.npmjs.org/
       -
-        name: Bump version (patch)
+        name: Tag the version in package.json (if not already tagged)
         run: |
-          LATEST_TAG=$(git describe --tags --abbrev=0) || exit 1
-          NEW_COMMITS=$(git rev-list --count "${LATEST_TAG}"..) || exit 1
-          [ "${NEW_COMMITS}" -gt 0 ] || exit 0
+          PKG_VER=$(node -p "require('./package.json').version")
+          if git rev-parse -q --verify "refs/tags/v${PKG_VER}" >/dev/null; then
+            echo "v${PKG_VER} already tagged; nothing to do."
+            exit 0
+          fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          pnpm i
-          pnpm version patch
-          git push --follow-tags
+          git tag "v${PKG_VER}"
+          git push origin "v${PKG_VER}"
       -
-        run: pnpm i
+        run: pnpm i --frozen-lockfile
       -
-        run: pnpm publish
+        run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
