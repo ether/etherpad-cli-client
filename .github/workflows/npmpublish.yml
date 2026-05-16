@@ -10,57 +10,35 @@ on:
       - main
       - master
 
+env:
+  PNPM_HOME: ~/.pnpm-store
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       -
         uses: actions/checkout@v6
-        with:
-          repository: ether/etherpad-lite
-          path: etherpad-lite
-      -
-        run: mv etherpad-lite ..
-      -
-        uses: actions/checkout@v6
-      -
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 10
-          run_install: false
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
       - uses: actions/cache@v5
-        name: Setup pnpm cache
+        name: Cache pnpm store
         with:
-          path: ${{ env.STORE_PATH }}
+          path: ${{ env.PNPM_HOME }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
+      - uses: pnpm/action-setup@v6
+        name: Install pnpm
+        with:
+          run_install: false
       -
-        run: cd ../etherpad-lite && ./bin/installDeps.sh && pnpm link --global
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
       -
-        run: |
-          pnpm config set auto-install-peers false
-          pnpm i
+        run: pnpm i
       -
-        run: |
-          has_testcli_script () {
-            [[ $(pnpm run | grep "^  test" | wc -l) > 0 ]]
-          }
-            
-            if has_testcli_script; then
-            pnpm run test
-            else
-            echo "No test script found"
-            fi
-        name: Run tests if available
+        run: pnpm run build
       -
         run: pnpm run lint
 
@@ -73,29 +51,23 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      -
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org/
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 10
-          run_install: false
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
       - uses: actions/cache@v5
-        name: Setup pnpm cache
+        name: Cache pnpm store
         with:
-          path: ${{ env.STORE_PATH }}
+          path: ${{ env.PNPM_HOME }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-      - name: Only install direct dependencies
-        run: pnpm config set auto-install-peers false
+      - uses: pnpm/action-setup@v6
+        name: Install pnpm
+        with:
+          run_install: false
+      -
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org/
       -
         name: Bump version (patch)
         run: |

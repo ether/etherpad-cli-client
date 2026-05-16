@@ -1,8 +1,9 @@
 {
   "name": "etherpad-cli-client",
   "description": "Node Client for Etherpad",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "type": "module",
+  "packageManager": "pnpm@11.1.2",
   "author": {
     "name": "John McLear",
     "email": "john@mclear.co.uk",
