@@ -3,6 +3,9 @@ name: "Backend tests"
 # any branch is useful for testing before a PR is submitted
 on: [push, pull_request]
 
+env:
+  PNPM_HOME: ~/.pnpm-store
+
 jobs:
   withplugins:
     # run on pushes to any branch
@@ -25,26 +28,22 @@ jobs:
         uses: actions/checkout@v6
         with:
           path: ./plugin
-      -
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 11
-          run_install: false
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
       - uses: actions/cache@v5
-        name: Setup pnpm cache
+        name: Cache pnpm store
         with:
-          path: ${{ env.STORE_PATH }}
+          path: ${{ env.PNPM_HOME }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
+      - uses: pnpm/action-setup@v6
+        name: Install pnpm
+        with:
+          run_install: false
+      -
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
       -
         name: Prepare Etherpad core
         run: |
