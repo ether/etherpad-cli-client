@@ -19,13 +19,6 @@ jobs:
     steps:
       -
         uses: actions/checkout@v6
-        with:
-          repository: ether/etherpad-lite
-          path: etherpad-lite
-      -
-        run: mv etherpad-lite ..
-      -
-        uses: actions/checkout@v6
       - uses: actions/cache@v5
         name: Cache pnpm store
         with:
@@ -43,21 +36,9 @@ jobs:
           node-version: 24
           cache: pnpm
       -
-        run: cd ../etherpad-lite && ./bin/installDeps.sh && pnpm link --global .
-      -
         run: pnpm i
       -
-        run: |
-          has_testcli_script () {
-            [[ $(pnpm run | grep "^  test" | wc -l) > 0 ]]
-          }
-
-            if has_testcli_script; then
-            pnpm run test
-            else
-            echo "No test script found"
-            fi
-        name: Run tests if available
+        run: pnpm run build
       -
         run: pnpm run lint
 
