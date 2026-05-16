@@ -45,9 +45,7 @@ jobs:
       -
         run: cd ../etherpad-lite && ./bin/installDeps.sh && pnpm link --global .
       -
-        run: |
-          pnpm config set auto-install-peers false
-          pnpm i
+        run: pnpm i
       -
         run: |
           has_testcli_script () {
@@ -89,8 +87,6 @@ jobs:
           node-version: 24
           cache: pnpm
           registry-url: https://registry.npmjs.org/
-      - name: Only install direct dependencies
-        run: pnpm config set auto-install-peers false
       -
         name: Bump version (patch)
         run: |

@@ -53,7 +53,6 @@ jobs:
       -
         name: Prepare plugin
         run: |
-          pnpm config set auto-install-peers false
           cd ./plugin
           PLUGIN_NAME=$(npx -c 'printf %s\\n "${npm_package_name}"') || exit 1
           echo "PLUGIN_NAME=$PLUGIN_NAME" >> $GITHUB_ENV
