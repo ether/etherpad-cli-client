@@ -38,6 +38,7 @@ export type PadClient = EventEmitter & {
 type ClientVarsMessage = {
   type: 'CLIENT_VARS';
   data: {
+    userId?: string;
     collab_client_vars: {
       initialAttributedText: AText;
       apool: JsonableAttributePool;
@@ -108,6 +109,7 @@ const isDisconnectMessage = (value: unknown): value is DisconnectMessage =>
 
 export const connect = (host?: string): PadClient => {
   const ee = new EventEmitter() as PadClient;
+  let authorId: string | null = null;
   const padState: PadState = {
     host: '',
     path: '',
@@ -198,6 +200,7 @@ export const connect = (host?: string): PadClient => {
         padState.atext = obj.data.collab_client_vars.initialAttributedText;
         padState.apool = new AttributePool().fromJsonable(obj.data.collab_client_vars.apool);
         padState.baseRev = obj.data.collab_client_vars.rev;
+        if (typeof obj.data.userId === 'string') authorId = obj.data.userId;
         ee.emit('connected', padState);
       } else if (isNewChangesMessage(obj)) {
         if (obj.data.newRev <= padState.baseRev) return;
@@ -240,16 +243,31 @@ export const connect = (host?: string): PadClient => {
     };
 
     ee.append = (text: string) => {
-      const newChangeset = Changeset.makeSplice(
-          padState.atext.text, padState.atext.text.length, 0, text);
+      // Insert just before the trailing '\n' so the pad's "doc always ends
+      // with \n" invariant is preserved. Etherpad's server (post-2.7.x)
+      // rejects USER_CHANGES whose application would leave the doc without
+      // a trailing newline, and tags inserts with no `author` attribute as
+      // bad changesets — both produced silent disconnects with the previous
+      // append-at-text.length / no-attribs behaviour.
+      const insertPos = Math.max(0, padState.atext.text.length - 1);
+      const attribs: Array<[string, string]> | undefined =
+          authorId ? [['author', authorId]] : undefined;
+      const localChangeset = Changeset.makeSplice(
+          padState.atext.text, insertPos, 0, text, attribs, padState.apool);
       const newRev = padState.baseRev;
-      padState.atext = Changeset.applyToAText(newChangeset, padState.atext, padState.apool) as AText;
+      padState.atext = Changeset.applyToAText(
+          localChangeset, padState.atext, padState.apool) as AText;
+      // Build a minimal wire pool containing only the attributes referenced
+      // by this changeset so the server can resolve our `*N` slot numbers.
+      const wireApool = new AttributePool();
+      const wireChangeset = Changeset.moveOpsToNewPool(
+          localChangeset, padState.apool, wireApool);
       const msg: PendingMessage = {
         component: 'pad',
         type: 'USER_CHANGES',
         baseRev: newRev,
-        changeset: newChangeset,
-        apool: new AttributePool().toJsonable(),
+        changeset: wireChangeset,
+        apool: wireApool.toJsonable(),
       };
       sendMessage(msg);
     };
