@@ -37,7 +37,7 @@
     "@types/node": "^20.12.7",
     "@types/superagent": "^8.1.7",
     "eslint": "^9.32.0",
-    "eslint-config-etherpad": "^3.0.13",
+    "eslint-config-etherpad": "^4.0.5",
     "typescript": "^5.4.2"
   },
   "scripts": {
