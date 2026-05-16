@@ -38,6 +38,7 @@ jobs:
       - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
+          version: 11
           run_install: false
       -
         uses: actions/setup-node@v6
@@ -49,7 +50,7 @@ jobs:
         run: |
           cd ./etherpad
           ./bin/installDeps.sh
-          pnpm link --global
+          pnpm link --global .
       -
         name: Prepare plugin
         run: |
@@ -59,11 +60,11 @@ jobs:
           echo "PLUGIN_NAME=$PLUGIN_NAME" >> $GITHUB_ENV
           pnpm install
           pnpm build
-          pnpm link --global
+          pnpm link --global .
       - name: Link plugin to Etherpad
         run: |
           cd ./etherpad/src
-          pnpm link "$PLUGIN_NAME"
+          pnpm link --global "$PLUGIN_NAME"
       -
         name: Remove core tests so only the client is tested
         run: rm -rf ./etherpad/src/tests/backend/specs
