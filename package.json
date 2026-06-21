@@ -43,7 +43,7 @@
     "eslint": "^9.32.0",
     "eslint-config-etherpad": "^3.0.13",
     "tsx": "^4.22.4",
-    "typescript": "^5.4.2"
+    "typescript": "^6.0.3"
   },
   "scripts": {
     "build": "tsc",
