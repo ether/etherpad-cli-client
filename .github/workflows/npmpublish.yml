@@ -19,7 +19,7 @@ jobs:
     steps:
       -
         uses: actions/checkout@v7
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         name: Cache pnpm store
         with:
           path: ${{ env.PNPM_HOME }}
@@ -51,7 +51,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         name: Cache pnpm store
         with:
           path: ${{ env.PNPM_HOME }}
